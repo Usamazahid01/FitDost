@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProfileSettingsScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -12,20 +13,19 @@ class ProfileSettingsScreen extends StatelessWidget {
 
         backgroundColor: const Color(0xFF00B58D),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: SingleChildScrollView(
+      body:  SingleChildScrollView(
           child: Column(
             children: [
               Row(
                 children: [
                   Container(
-                    padding:EdgeInsets.only(left: 3,top: 30),
+                    padding:EdgeInsets.only(left: 20.w,top: 30.h),
                     child: Text(
+
                       'Profile Setting',
                       style: TextStyle(
                         color: Color(0xFF4A4852),
-                        fontSize: 22,
+                        fontSize: 22.sp,
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w500,
                         height: 0,
@@ -71,90 +71,105 @@ class ProfileSettingsScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: TextFormField(
-                        controller: _nameController,
-                        decoration: InputDecoration(
-                          labelText: 'Name',
-                          labelStyle: TextStyle(color: Colors.grey[700]),
-                          contentPadding: EdgeInsets.symmetric(vertical: 10),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey[400]!),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Color(0xFF00BFA5)),
-                          ),
-                        ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your name';
-                          }
-                          return null;
-                        },
+              Center(
+                child: Container(
+                  margin: EdgeInsets.only(top: 20.h,left: 20.w,right: 20.w ),
+
+                  child: TextField(
+                    style: const TextStyle(color: Colors.black),
+                    cursorColor: Colors.black,
+
+                    decoration: InputDecoration(
+                      label: Text("Name"),
+                      labelStyle: TextStyle(
+                        color: Colors.black,
+                        fontSize: 22.sp,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w400,
+                        height: 0,
                       ),
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black.withOpacity(0.4000000059604645)),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black.withOpacity(0.4000000059604645)),
+                      ),
+
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: TextFormField(
-                        controller: _emailController,
-                        decoration: InputDecoration(
-                          labelText: 'Email',
-                          labelStyle: TextStyle(color: Colors.grey[700]),
-                          contentPadding: EdgeInsets.symmetric(vertical: 10),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey[400]!),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Color(0xFF00BFA5)),
-                          ),
-                        ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your email';
-                          }
-                          if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                            return 'Please enter a valid email';
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
-                    SizedBox(height: 30),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:  Color(0xFF00B58D),
-                        padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                      ),
-                      onPressed: () {
-                        if (_formKey.currentState?.validate() ?? false) {
-                          // Process the data
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Updating profile...')),
-                          );
-                        }
-                      },
-                      child: Text(
-                        'Update',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
+
                 ),
               ),
-            ],
+              Center(
+                child: Container(
+                  margin: EdgeInsets.only(top: 20.h,left: 20.w,right: 20.w ),
+                  child: TextField(
+                    style: const TextStyle(color: Colors.black),
+                    cursorColor: Colors.black,
+
+                    decoration: InputDecoration(
+                      label: Text("Email"),
+                      labelStyle: TextStyle(
+                        color: Colors.black,
+                        fontSize: 22.sp,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w400,
+                        height: 0,
+                      ),
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black.withOpacity(0.4000000059604645)),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black.withOpacity(0.4000000059604645)),
+                      ),
+
+                    ),
+                  ),
+
+                ),
+              ),
+
+              GestureDetector(
+
+                child: Container(
+                  margin: EdgeInsets.only(top: 80.h),
+                  width: 167.w,
+                  height: 42.h,
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        left: 0,
+                        top: 0,
+                        child: Container(
+                          width: 167.w,
+                          height: 42.h,
+                          decoration: BoxDecoration(color: Color(0xFF00B58D)),
+                        ),
+                      ),
+                      Positioned(
+                        left: 45.w,
+                        top: 5.h,
+                        child: Text(
+                          'Update',
+                          style: TextStyle(
+                            color: Color(0xFFF7FDFD),
+                            fontSize: 21.sp,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w400,
+                            height: 0,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+  ]
           ),
         ),
-      ),
+
     );
   }
 }

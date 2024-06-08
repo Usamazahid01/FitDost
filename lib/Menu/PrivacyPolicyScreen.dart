@@ -1,4 +1,4 @@
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -36,79 +36,78 @@ class PrivacyPolicyScreen extends StatelessWidget{
                 child: Container(
                     padding:EdgeInsets.only(left: 20.w,top: 25.h),
                     child: SizedBox(
-                    width: 354.w,
-                    height: 263.h,
+                      width: 354.w,
+                      height: 230.h,
                       child: Text(
-                        "\n1. Your privacy matters to us. We handle your personal information responsibly.\n\n2. We do not share your data with third parties. Your information is safe with us.\n\n3. For more information, please contact us.",
+                      "\n1. Your privacy matters to us. We handle your personal information responsibly.\n\n2. We do not share your data with third parties. Your information is safe with us.\n\n3. For more information, please contact us.",
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 16.sp,
+                          fontSize: 16,
                           fontFamily: 'Poppins',
                           fontWeight: FontWeight.w400,
                           height: 0,
                         ),
                       ),
-                    ),
 
+
+                    )
                 ),
               )
             ],
           ),
+          SizedBox(height: 40.h,),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                padding: EdgeInsets.only(left: 60.w,top: 30.h),
-                child:  Image.asset('assets/images/Aboutuslogo.png'),
-
-
-              ),
-
-            ],
-
-          ),
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 130,top: 140),
-                child: Container(
-                  width: 132.w,
-                  height: 32.h,
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        left: 52.w,
-                        top: 0,
-                        child: Text(
-                          'V 1.0',
-                          style: TextStyle(
-                            color: Color(0xFF4A4852),
-                            fontSize: 10.sp,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w400,
-                            height: 0,
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 0,
-                        top: 20.h,
-                        child: Text(
-                          '© 2024 FitDost. All rights reserved',
-                          style: TextStyle(
-                            color: Color(0xFF4A4852),
-                            fontSize: 8.sp,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w400,
-                            height: 0,
-                          ),
-                        ),
-                      ),
-                    ],
+                width: 241,
+                height: 134,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("assets/images/Logo/LightOpecityLogo.png"),
+                    fit: BoxFit.fill,
                   ),
                 ),
               )
+
             ],
-          )
+
+          ),
+          SizedBox(height:180.h),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'V 1.0',
+                style: TextStyle(
+                  color: Color(0xFF4A4852),
+                  fontSize: 10.sp,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w400,
+                  height: 0,
+                ),
+              ),
+
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+
+              Text(
+                '© 2024 FitDost. All rights reserved',
+                style: TextStyle(
+                  color: Color(0xFF4A4852),
+                  fontSize: 8.sp,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w400,
+                  height: 0,
+                ),
+              ),
+
+
+            ],
+          ),
 
 
 

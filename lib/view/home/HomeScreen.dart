@@ -1,5 +1,6 @@
 
 import 'package:fitdost_app/Drawer/Drawer.dart';
+import 'package:fitdost_app/view/Features/TalkWithFitdostScreen.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontSize: 16.sp,
                   fontFamily: 'Poppins',
                   fontWeight: FontWeight.w400,
-                  height: 0,
+                  height: 0.h,
                 ),
               ),
             ),
@@ -74,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontSize: 26,
                   fontFamily: 'Poppins',
                   fontWeight: FontWeight.w500,
-                  height: 0,
+                  height: 0.h,
                 ),
               ),
             ),
@@ -102,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             )
                           ],
                         ),
-                  
+
                       ),
                       Positioned(
                         left: 17.w,
@@ -118,34 +119,34 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       ),
-                       Positioned(
-                           left: 17.w,
-                         top: 110.h,
-                         child: Text(
-                           'Receive customized diet plans, workout\nroutines,and relaxation techniques tailored\nto your needs.',
-                           style: TextStyle(
-                             color: Colors.white,
-                             fontSize: 7.sp,
-                             fontFamily: 'Poppins',
-                             fontWeight: FontWeight.w500,
-                  
-                           ),
-                         ),
-                       ),
+                      Positioned(
+                        left: 17.w,
+                        top: 110.h,
+                        child: Text(
+                          'Receive customized diet plans, workout\nroutines,and relaxation techniques tailored\nto your needs.',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 7.sp,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w500,
+
+                          ),
+                        ),
+                      ),
                       Positioned(
                         left: 180,
                         top: 0,
-                        
+
                         // child: Image.asset("assets/images/BackGrounds/card1.png"),
                         child: Container(
-                  
+
                           width: 145.w,
                           height: 175.h,
                           // alignment: Alignment.centerRight,
 
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                             image: new AssetImage("assets/images/BackGrounds/card1.png"),
+                              image: new AssetImage("assets/images/BackGrounds/card1.png"),
                               fit: BoxFit.fill,
                             ),
                           ),
@@ -167,211 +168,216 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontSize: 18.sp,
                   fontFamily: 'Poppins',
                   fontWeight: FontWeight.w500,
-                  height: 0,
+                  height: 0.h,
                 ),
               ),
             ),
 
-Expanded(
-  child: ListView(
-    children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Stack(
-            children: [
-              Container(
-                width: 354.w,
-                height: 110.h,
-                decoration: ShapeDecoration(
-                  color: Color(0xFFFF6D6E),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  shadows: [
-                    BoxShadow(
-                      color: Color(0x49000000),
-                      blurRadius: 9.70,
-                      offset: Offset(0, 5),
-                      spreadRadius: 0,
-                    )
-                  ],
-                ),
-              ),
-              Positioned(
-                left: 17.w,
-                top: 15.h,
-                child:  Text(
-                  'Emotion\nRecognition',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w700,
-                    height: 1.5.h,
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 17.w,
-                top: 70.h,
-                child:  Text(
-                  'Identify and manage your emotions effectively\nwith our AI-powered recognition tool.',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 7,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w500,
-                    height: 0,
-                  ),
-                ),
-              ),
-              Positioned(
-                  left: 259.w,
-                  top: 28.h,
-                  child:  SvgPicture.asset("assets/images/Icons/FaceRecogIcon.svg")
-              ),
+            Expanded(
+              child: ListView(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Stack(
+                        children: [
+                          Container(
+                            width: 354.w,
+                            height: 110.h,
+                            decoration: ShapeDecoration(
+                              color: Color(0xFFFF6D6E),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              shadows: [
+                                BoxShadow(
+                                  color: Color(0x49000000),
+                                  blurRadius: 9.70,
+                                  offset: Offset(0, 5),
+                                  spreadRadius: 0,
+                                )
+                              ],
+                            ),
+                          ),
+                          Positioned(
+                            left: 17.w,
+                            top: 15.h,
+                            child:  Text(
+                              'Emotion\nRecognition',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w700,
+                                height: 1.5.h,
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            left: 17.w,
+                            top: 70.h,
+                            child:  Text(
+                              'Identify and manage your emotions effectively\nwith our AI-powered recognition tool.',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 7,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w500,
+                                height: 0,
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                              left: 259.w,
+                              top: 28.h,
+                              child:  SvgPicture.asset("assets/images/Icons/FaceRecogIcon.svg")
+                          ),
 
-            ],
-          ),
-        ],
-
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            margin: EdgeInsets.only(top: 15.h),
-            child: Stack(
-              children: [
-                Container(
-                  width: 354.w,
-                  height: 110.h,
-                  decoration: ShapeDecoration(
-                    color: Color(0xFFFCA263),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    shadows: [
-                      BoxShadow(
-                        color: Color(0x49000000),
-                        blurRadius: 9.70,
-                        offset: Offset(0, 5),
-                        spreadRadius: 0,
-                      )
+                        ],
+                      ),
                     ],
-                  ),
-                ),
-                Positioned(
-                  left: 17.w,
-                  top: 15.h,
-                  child:  Text(
-                    'Quranic Verses\nfor Peace',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w700,
-                      height: 1.5.h,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  left: 17.w,
-                  top: 70.h,
-                  child:  Text(
-                    'Discover serenity and calmness through\nselected verses from the Quran.',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 7,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w500,
-                      height: 0,
-                    ),
-                  ),
-                ),
-                Positioned(
-                    left: 239.w,
-                    top: 28.h,
-                    child: Image.asset("assets/images/Icons/QuranIcon.png"),
-                ),
 
-              ],
-            ),
-          ),
-        ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(top: 15.h),
+                        child: Stack(
+                          children: [
+                            Container(
+                              width: 354.w,
+                              height: 110.h,
+                              decoration: ShapeDecoration(
+                                color: Color(0xFFFCA263),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                shadows: [
+                                  BoxShadow(
+                                    color: Color(0x49000000),
+                                    blurRadius: 9.70,
+                                    offset: Offset(0, 5),
+                                    spreadRadius: 0,
+                                  )
+                                ],
+                              ),
+                            ),
+                            Positioned(
+                              left: 17.w,
+                              top: 15.h,
+                              child:  Text(
+                                'Quranic Verses\nfor Peace',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w700,
+                                  height: 1.5.h,
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              left: 17.w,
+                              top: 70.h,
+                              child:  Text(
+                                'Discover serenity and calmness through\nselected verses from the Quran.',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 7,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w500,
+                                  height: 0,
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              left: 239.w,
+                              top: 28.h,
+                              child: Image.asset("assets/images/Icons/QuranIcon.png"),
+                            ),
 
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            margin: EdgeInsets.only(top: 15.h),
-            child: Stack(
-              children: [
-                Container(
-                  width: 354.w,
-                  height: 110.h,
-                  decoration: ShapeDecoration(
-                    color: Color(0xFF1D479B),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    shadows: [
-                      BoxShadow(
-                        color: Color(0x49000000),
-                        blurRadius: 9.70,
-                        offset: Offset(0, 5),
-                        spreadRadius: 0,
-                      )
+                          ],
+                        ),
+                      ),
                     ],
-                  ),
-                ),
-                Positioned(
-                  left: 17.w,
-                  top: 15.h,
-                  child:  Text(
-                    'Talk with\nFitDost',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w700,
-                      height: 1.5.h,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  left: 17.w,
-                  top: 70.h,
-                  child:  Text(
-                    'Engage in real-time conversations with\nour AI assistant for personalized advice and support.',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 7,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w500,
-                      height: 0,
-                    ),
-                  ),
-                ),
-                Positioned(
-                    left: 259.w,
-                    top: 28.h,
-                    child:  SvgPicture.asset("assets/images/Icons/MessageIcon.svg")
-                ),
 
-              ],
-            ),
-          ),
-        ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      InkWell(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>TalkWithFitdostScreen(),));
+                        },
+                        child: Container(
+                          margin: EdgeInsets.only(top: 15.h),
+                          child: Stack(
+                            children: [
+                              Container(
+                                width: 354.w,
+                                height: 110.h,
+                                decoration: ShapeDecoration(
+                                  color: Color(0xFF1D479B),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  shadows: [
+                                    BoxShadow(
+                                      color: Color(0x49000000),
+                                      blurRadius: 9.70,
+                                      offset: Offset(0, 5),
+                                      spreadRadius: 0,
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Positioned(
+                                left: 17.w,
+                                top: 15.h,
+                                child:  Text(
+                                  'Talk with\nFitDost',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w700,
+                                    height: 1.5.h,
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                left: 17.w,
+                                top: 70.h,
+                                child:  Text(
+                                  'Engage in real-time conversations with\nour AI assistant for personalized advice and support.',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 7,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w500,
+                                    height: 0,
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                  left: 259.w,
+                                  top: 28.h,
+                                  child:  SvgPicture.asset("assets/images/Icons/MessageIcon.svg")
+                              ),
 
-      ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
 
-      
-    ],
-  ),
-)
+                  ),
+
+
+                ],
+              ),
+            )
 
 
 

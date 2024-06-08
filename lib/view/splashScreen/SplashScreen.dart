@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'package:fitdost_app/OnBoarding/BordingScreen1.dart';
 import 'package:fitdost_app/view/Signup/SignupScreen.dart';
-import 'package:fitdost_app/view/login/LoginScreen.dart';
-import 'package:fitdost_app/view/login/LoginScreen2.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget{
