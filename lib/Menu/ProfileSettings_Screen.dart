@@ -1,10 +1,16 @@
+import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 class ProfileSettingsScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
-  final _nameController = TextEditingController();
+  final _newnameController = TextEditingController();
   final _emailController = TextEditingController();
+  User? currentUser = FirebaseAuth.instance.currentUser;
+  String imageUrl="";
 
   @override
   Widget build(BuildContext context) {
@@ -35,101 +41,185 @@ class ProfileSettingsScreen extends StatelessWidget {
                 ],
               ),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(top: 20),
-                    width: 76,
-                    height: 76,
-                    decoration: ShapeDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(
-                          "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+
+              StreamBuilder<DocumentSnapshot>(
+                stream:  FirebaseFirestore.instance.collection("Users").doc(currentUser?.email).snapshots(),
+
+
+                builder: (context,snapsot) {
+                  if(snapsot.hasData) {
+                    final userData = snapsot.data!.data() as Map<String, dynamic>;
+                    final name = userData["Username"] ?? "No Name";
+                    final email = userData["email"] ?? "No Email";
+                    final ImageUrlfromdatabase = userData["ImageUrl"] ;
+                    return Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ImageUrlfromdatabase  != null ?  Container(
+                              margin: EdgeInsets.only(top: 20),
+                              width: 76,
+                              height: 76,
+                              decoration: ShapeDecoration(
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                    ImageUrlfromdatabase,
+                                  ),
+                                  fit: BoxFit.cover,
+                                ),
+                                shape: OvalBorder(
+                                  side: BorderSide(width: 2, color: Color(0xFF5A728C)),
+                                ),
+                              ),
+                            ):Container(
+                              margin: EdgeInsets.only(top: 20),
+                              width: 76,
+                              height: 76,
+                              decoration: ShapeDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage("assets/images/Icons/DefultProfilePic.png"),
+                                  fit: BoxFit.cover,
+                                ),
+                                shape: OvalBorder(
+                                  side: BorderSide(width: 2, color: Color(0xFF5A728C)),
+                                ),
+                              ),
+                            ),
+
+                          ],
                         ),
-                        fit: BoxFit.cover,
-                      ),
-                      shape: OvalBorder(
-                        side: BorderSide(width: 2, color: Color(0xFF5A728C)),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 10),
-              TextButton(
-                onPressed: () {
-                  // Add functionality to change profile photo
+                        SizedBox(height: 10),
+                        TextButton(
+                          onPressed: () async{
+                            ImagePicker imagePicker = ImagePicker();
+                            XFile? file = await imagePicker.pickImage(source: ImageSource.gallery);
+
+                            if (file == null) {
+                              print('No file selected');
+                              return;
+                            }
+
+                            print('File path: ${file.path}');
+                            String uniqueName = DateTime.now().millisecondsSinceEpoch.toString();
+
+                            Reference referenceRoot = FirebaseStorage.instance.ref();
+                            Reference referenceDirImage = referenceRoot.child('images');
+                            Reference referenceImageToUpload = referenceDirImage.child(uniqueName);
+
+                            try {
+                              print('Uploading image...');
+                              await referenceImageToUpload.putFile(File(file.path));
+                              imageUrl = await referenceImageToUpload.getDownloadURL();
+                              print('Image URL: $imageUrl');
+                              // Here you can save the imageUrl to Firestore or use it as needed
+                              FirebaseFirestore.instance.collection("Users").doc(currentUser?.email).update(
+                                  {
+                                    "ImageUrl":imageUrl,
+                                  }
+
+                              );
+
+
+
+                            } catch (error) {
+                              print('Error uploading image: $error');
+                            }
+                            // Add functionality to change profile photo
+                          },
+                          child: Text(
+                            'Change profile photo',
+                            style: TextStyle(
+                              color: Color(0xFF00B58D),
+                              fontSize: 12,
+                              fontFamily: 'Cabin',
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+
+                        ),
+
+
+
+
+                        Center(
+                          child: Container(
+                            margin: EdgeInsets.only(top: 20.h,left: 20.w,right: 20.w ),
+
+                            child: TextFormField(
+                              style: const TextStyle(color: Colors.black),
+                              cursorColor: Colors.black,
+                               initialValue:name,
+
+
+                              decoration: InputDecoration(
+
+                                label: Text("Name"),
+                                labelStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 22.sp,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w400,
+                                  height: 0,
+                                ),
+                                floatingLabelBehavior: FloatingLabelBehavior.always,
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.black.withOpacity(0.4000000059604645)),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.black.withOpacity(0.4000000059604645)),
+                                ),
+
+                              ),
+                            ),
+
+                          ),
+                        ),
+                        Center(
+                          child: Container(
+                            margin: EdgeInsets.only(top: 20.h,left: 20.w,right: 20.w ),
+                            child: TextFormField(
+                              style: const TextStyle(color: Colors.black),
+                              cursorColor: Colors.black,
+                              initialValue:email,
+
+                              decoration: InputDecoration(
+                                label: Text("Email"),
+
+                                labelStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 22.sp,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w400,
+                                  height: 0,
+                                ),
+                                floatingLabelBehavior: FloatingLabelBehavior.always,
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.black.withOpacity(0.4000000059604645)),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.black.withOpacity(0.4000000059604645)),
+                                ),
+
+                              ),
+                            ),
+
+                          ),
+                        ),
+                      ],
+                    );
+                  } else if(snapsot.hasError){
+                    return Center(child: Text("Error "+ snapsot.error.toString()));
+                  }else{
+                    return Center(child: CircularProgressIndicator());
+                  }
                 },
-                child: Text(
-                  'Change profile photo',
-                  style: TextStyle(
-                    color: Color(0xFF00B58D),
-                    fontSize: 12,
-                    fontFamily: 'Cabin',
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
+
+
               ),
-              Center(
-                child: Container(
-                  margin: EdgeInsets.only(top: 20.h,left: 20.w,right: 20.w ),
 
-                  child: TextField(
-                    style: const TextStyle(color: Colors.black),
-                    cursorColor: Colors.black,
 
-                    decoration: InputDecoration(
-                      label: Text("Name"),
-                      labelStyle: TextStyle(
-                        color: Colors.black,
-                        fontSize: 22.sp,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w400,
-                        height: 0,
-                      ),
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black.withOpacity(0.4000000059604645)),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black.withOpacity(0.4000000059604645)),
-                      ),
 
-                    ),
-                  ),
-
-                ),
-              ),
-              Center(
-                child: Container(
-                  margin: EdgeInsets.only(top: 20.h,left: 20.w,right: 20.w ),
-                  child: TextField(
-                    style: const TextStyle(color: Colors.black),
-                    cursorColor: Colors.black,
-
-                    decoration: InputDecoration(
-                      label: Text("Email"),
-                      labelStyle: TextStyle(
-                        color: Colors.black,
-                        fontSize: 22.sp,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w400,
-                        height: 0,
-                      ),
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black.withOpacity(0.4000000059604645)),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black.withOpacity(0.4000000059604645)),
-                      ),
-
-                    ),
-                  ),
-
-                ),
-              ),
 
               GestureDetector(
 

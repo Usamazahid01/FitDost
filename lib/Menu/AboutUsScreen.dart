@@ -1,8 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class AboutUsScreen extends StatelessWidget{
+class AboutUsScreen extends StatefulWidget{
+
+  @override
+  State<AboutUsScreen> createState() => _AboutUsScreenState();
+}
+
+class _AboutUsScreenState extends State<AboutUsScreen> {
+  // LatLng initialLocation = const LatLng(37.422131, -122.084801);
+  // BitmapDescriptor markerIcon = BitmapDescriptor.defaultMarker;
+  LatLng initialLocation = LatLng(31.3489, 74.1602); // Raiwind Road, Lahore, Pakistan
+  BitmapDescriptor markerIcon = BitmapDescriptor.defaultMarker;
+  @override
+  void initState() {
+    // addCustomIcon();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,17 +76,65 @@ class AboutUsScreen extends StatelessWidget{
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                // margin: EdgeInsets.only(top: 80.h),
-                width: 241.w,
-                height: 134.h,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("assets/images/Logo/LightOpecityLogo.png"),
-                    fit: BoxFit.fill,
+              // Container(
+              //   // margin: EdgeInsets.only(top: 80.h),
+              //   width: 241.w,
+              //   height: 134.h,
+              //   decoration: BoxDecoration(
+              //     image: DecorationImage(
+              //       image: AssetImage("assets/images/Logo/LightOpecityLogo.png"),
+              //       fit: BoxFit.fill,
+              //     ),
+              //   ),
+              // )
+              // Expanded(
+              //   child: Container(
+              //     width: 30,
+              //     height: 30,
+              //     child: GoogleMap(
+              //       initialCameraPosition: CameraPosition(
+              //         target: initialLocation,
+              //         zoom: 14,
+              //       ),
+              //       markers: {
+              //         Marker(
+              //           markerId: const MarkerId("marker1"),
+              //           position: const LatLng(37.422131, -122.084801),
+              //           draggable: true,
+              //           onDragEnd: (value) {
+              //             // value is the new position
+              //           },
+              //           icon: markerIcon,
+              //         ),
+              //         Marker(
+              //           markerId: const MarkerId("marker2"),
+              //           position: const LatLng(37.415768808487435, -122.08440050482749),
+              //         ),
+              //       },
+              //     ),
+              //   ),
+              // ),
+              Expanded(
+                child: Container(
+                  width: 263,
+                  height: 263,
+                  child: GoogleMap(
+                    initialCameraPosition: CameraPosition(
+                      target: initialLocation,
+                      zoom: 14,
+                    ),
+                    markers: {
+                      Marker(
+                        markerId: MarkerId("myLocationMarker"),
+                        position: initialLocation,
+                      ),
+                    },
                   ),
                 ),
-              )
+              ),
+
+
+
 
             ],
 
@@ -116,5 +182,4 @@ class AboutUsScreen extends StatelessWidget{
     ),
     );
   }
-
 }

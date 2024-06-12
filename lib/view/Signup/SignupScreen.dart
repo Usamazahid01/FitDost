@@ -1,9 +1,11 @@
 
+
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitdost_app/common/Colour_extension.dart';
-import 'package:fitdost_app/view/home/HomeScreen.dart';
+import 'package:fitdost_app/view/home/HomeScreenMain.dart';
 import 'package:fitdost_app/view/login/LoginScreen2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +31,16 @@ class _SignupScreenState extends State<SignupScreen> {
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final _confirmPasswordController = TextEditingController();
+
+  Future addUserDetails( String displayName,String email  ) async
+  {
+    await FirebaseFirestore.instance.collection('users').add({
+      'displayName': displayName,
+      'email':email,
+      'uid': _auth.currentUser!.uid,
+
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -266,14 +278,22 @@ class _SignupScreenState extends State<SignupScreen> {
                         if (_formKey.currentState?.validate() ?? false) {
       if (_passwordController.text == _confirmPasswordController.text) {
         try {
-
-          await _auth.createUserWithEmailAndPassword(
+          UserCredential userCredential= await _auth.createUserWithEmailAndPassword(
             email: _emailController.text.trim(),
             password: _passwordController.text.trim(),
           );
+          FirebaseFirestore.instance.collection("Users").doc(userCredential.user!.email).set({
+                          "Username": _nameController.text.trim(),
+                        "email":_emailController.text.trim(),
+                        });
+          //
+          // addUserDetails(
+          //   _nameController.text.trim(),
+          //   _emailController.text.trim(),
+          // );
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => HomeScreen()),
+            MaterialPageRoute(builder: (context) => HomeScreenMain()),
           );
         } catch (error) {
           Utils().toast(error.toString());

@@ -4,6 +4,7 @@ import 'package:fitdost_app/common/Colour_extension.dart';
 import 'package:fitdost_app/utils/toast.dart';
 import 'package:fitdost_app/view/Signup/SignupScreen.dart';
 import 'package:fitdost_app/view/home/HomeScreen.dart';
+import 'package:fitdost_app/view/home/HomeScreenMain.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,11 +24,11 @@ class _LoginPageState extends State<LoginScreen2> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   @override
-  // void dispose() {
-  //   _emailController.dispose();
-  //   _passwordController.dispose();
-  //   super.dispose();
-  // }
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -186,27 +187,28 @@ class _LoginPageState extends State<LoginScreen2> {
                ),
                Center(
                  child: GestureDetector(
-                   onTap: (){
-                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomeScreen(),));
-                   },
-                   // onTap: () async {
-                   //   if (_formKey.currentState?.validate() ?? false) {
-                   //     try {
-                   //       UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-                   //         email: _emailController.text.trim(),
-                   //         password: _passwordController.text.trim(),
-                   //       );
-                   //       Navigator.pushReplacement(
-                   //         context,
-                   //         MaterialPageRoute(builder: (context) => HomeScreen()),
-                   //       );
-                   //       print('Signed in: ${userCredential.user}');
-                   //     } catch (e) {
-                   //       Utils().toast(e.toString());
-                   //     }
-                   //   }
-                   //
+                   // onTap: (){
+                   //   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomeScreenMain(),));
                    // },
+                   onTap: () async {
+                     if (_formKey.currentState?.validate() ?? false) {
+                       try {
+                         UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+                           email: _emailController.text.trim(),
+                           password: _passwordController.text.trim(),
+                         );
+                         User? user = userCredential.user;
+                         Navigator.pushReplacement(
+                           context,
+                           MaterialPageRoute(builder: (context) => HomeScreenMain()),
+                         );
+                         print('Signed in: ${userCredential.user}');
+                       } catch (e) {
+                         Utils().toast(e.toString());
+                       }
+                     }
+
+                   },
                    child: Container(
                      margin: EdgeInsets.only(top: 544.h),
                      width: 177.w,
