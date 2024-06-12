@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "142884686200",
+    "project_id": "fitdostbackend",
+    "storage_bucket": "fitdostbackend.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:142884686200:android:8df7f8e10f5dbb6625608d",
+        "android_client_info": {
+          "package_name": "com.example.fitdost_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmZGzx9GgRE74Bv_OExPEHmIyGAXQHX2I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
