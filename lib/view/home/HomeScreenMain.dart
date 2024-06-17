@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitdost_app/Drawer/Drawer.dart';
 import 'package:fitdost_app/Menu/AboutUsScreen.dart';
 import 'package:fitdost_app/Menu/ProfileSettings_Screen.dart';
+import 'package:fitdost_app/view/BottomNaviScreens/ProfileBottomScreen.dart';
 import 'package:fitdost_app/view/BottomNaviScreens/SaveScreen.dart';
 import 'package:fitdost_app/view/Features/TalkWithFitdostScreen.dart';
 import 'package:fitdost_app/view/home/HomeScreen.dart';
@@ -24,9 +25,10 @@ class HomeScreenMain extends StatefulWidget{
 class _HomeScreenState extends State<HomeScreenMain> {
   User? currentUser = FirebaseAuth.instance.currentUser;
   final Screns=[
-SaveScreen(),
+    SaveScreen(),
     HomeScreen(),
-    ProfileSettingsScreen(),
+    ProfileBottomScreen(),
+
   ];
   int myIndex=1;
   @override
@@ -50,7 +52,7 @@ SaveScreen(),
 
 
               builder: (context,snapsot) {
-                if(snapsot.hasData) {
+                if(snapsot.hasData && snapsot.data!.exists) {
                   final userData = snapsot.data!.data() as Map<String, dynamic>;
 
                   final ImageUrlfromdatabase = userData["ImageUrl"] ;
@@ -96,7 +98,7 @@ SaveScreen(),
         ),
         drawer: NevigationDrawer(),
         body: Screns[
-          myIndex
+        myIndex
         ],
 
 
@@ -128,8 +130,8 @@ SaveScreen(),
               icon:  SvgPicture.asset(
                 'assets/images/Icons/SaveIcon.svg',
                 color: myIndex == 0 ? Color(0xFF1D479B): Colors.black,
-                width: 23,
-                height: 19,
+                width: 23.w,
+                height: 19.h,
               ),
 
               label: 'Save',
@@ -141,8 +143,8 @@ SaveScreen(),
               icon:  SvgPicture.asset(
                 'assets/images/Icons/HomeIcon.svg',
                 color: myIndex == 1 ? Color(0xFF1D479B): Colors.black,
-                width: 23,
-                height: 19,
+                width: 23.w,
+                height: 19.h,
 
               ),
               label: 'Home',

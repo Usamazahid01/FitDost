@@ -30,23 +30,31 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_screenutil:
-  flutter_svg:
-  google_generative_ai:
-  intl:
-  firebase_core:
-  firebase_auth:
-  fluttertoast:
-  google_sign_in:
-  form_validator:
-  form_field_validator:
-  cloud_firestore:
-  image_picker:
-  cupertino_icons:
-  firebase_storage:
-  firebase_app_check:
-  google_maps_flutter:
-  map_launcher:
+  flutter_screenutil: any
+  flutter_svg: any
+  google_generative_ai: any
+  intl: any
+  firebase_core: any
+  firebase_auth: any
+  fluttertoast: any
+  google_sign_in: any
+  form_validator: any
+  form_field_validator: any
+  cloud_firestore: any
+  image_picker: any
+  cupertino_icons: any
+  firebase_storage: any
+  firebase_app_check: any
+  google_maps_flutter: any
+  map_launcher: any
+  flutter_bloc: any
+  google_ml_kit: any
+  camera: any
+  path: any
+  path_provider: any
+  google_mlkit_commons: any
+  lottie: any
+  shared_preferences: any
 
 dev_dependencies:
   flutter_test:

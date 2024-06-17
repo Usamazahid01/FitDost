@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class NevigationDrawer extends StatefulWidget{
@@ -38,6 +39,8 @@ class _NevigationDrawerState extends State<NevigationDrawer> {
   //   );
   // }
   Future<void> _signOut() async {
+    final SharedPreferences sharedPreferences=await SharedPreferences.getInstance();
+    sharedPreferences.remove("email");
     await FirebaseAuth.instance.signOut();
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(builder: (context) => LoginScreen2()),
@@ -78,7 +81,7 @@ class _NevigationDrawerState extends State<NevigationDrawer> {
 
 
           builder: (context,snapsot) {
-            if(snapsot.hasData) {
+            if(snapsot.hasData && snapsot.data!.exists) {
               final userData = snapsot.data!.data() as Map<String, dynamic>;
               final name = userData["Username"] ?? "No Name";
               final email = userData["email"] ?? "No Email";

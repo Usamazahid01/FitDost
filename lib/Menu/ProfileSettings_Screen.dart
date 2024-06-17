@@ -11,7 +11,6 @@ class ProfileSettingsScreen extends StatelessWidget {
   final _emailController = TextEditingController();
   User? currentUser = FirebaseAuth.instance.currentUser;
   String imageUrl="";
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,6 +51,8 @@ class ProfileSettingsScreen extends StatelessWidget {
                     final name = userData["Username"] ?? "No Name";
                     final email = userData["email"] ?? "No Email";
                     final ImageUrlfromdatabase = userData["ImageUrl"] ;
+
+                    _newnameController.text = name;
                     return Column(
                       children: [
                         Row(
@@ -149,7 +150,9 @@ class ProfileSettingsScreen extends StatelessWidget {
                             child: TextFormField(
                               style: const TextStyle(color: Colors.black),
                               cursorColor: Colors.black,
-                               initialValue:name,
+                               // initialValue:name,
+                              controller:  _newnameController,
+
 
 
                               decoration: InputDecoration(
@@ -241,14 +244,36 @@ class ProfileSettingsScreen extends StatelessWidget {
                       Positioned(
                         left: 45.w,
                         top: 5.h,
-                        child: Text(
-                          'Update',
-                          style: TextStyle(
-                            color: Color(0xFFF7FDFD),
-                            fontSize: 21.sp,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w400,
-                            height: 0,
+                        child: GestureDetector(
+                          onTap: () async
+                          {
+                            if( _newnameController.text.trim().isEmpty){
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("Please Enter UserName")),
+                              );
+                            }else{
+                              FirebaseFirestore.instance.collection("Users").doc(currentUser?.email).update(
+                                {
+                                  "Username":_newnameController.text.trim(),
+
+                                },);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text("Username update Sucessfully")),
+                                    );
+
+                            }
+
+
+                          },
+                          child: Text(
+                            'Update',
+                            style: TextStyle(
+                              color: Color(0xFFF7FDFD),
+                              fontSize: 21.sp,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w400,
+                              height: 0,
+                            ),
                           ),
                         ),
                       ),

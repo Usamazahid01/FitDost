@@ -12,6 +12,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
 
+
 class LoginScreen2 extends StatefulWidget {
   const LoginScreen2({Key? key}) : super(key: key);
 
@@ -198,6 +199,10 @@ class _LoginPageState extends State<LoginScreen2> {
                            password: _passwordController.text.trim(),
                          );
                          User? user = userCredential.user;
+                         CircularProgressIndicator();
+                         // final SharedPreferences sharedprefrences = await SharedPreferences.getInstance();
+                         //
+                         // sharedprefrences.setString("email", _emailController.text);
                          Navigator.pushReplacement(
                            context,
                            MaterialPageRoute(builder: (context) => HomeScreenMain()),

@@ -291,7 +291,9 @@ class _SignupScreenState extends State<SignupScreen> {
           //   _nameController.text.trim(),
           //   _emailController.text.trim(),
           // );
+          CircularProgressIndicator();
           Navigator.pushReplacement(
+
             context,
             MaterialPageRoute(builder: (context) => HomeScreenMain()),
           );

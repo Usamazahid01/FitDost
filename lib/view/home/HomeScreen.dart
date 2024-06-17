@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fitdost_app/view/Features/AiPushupscounter/views/pose_detection_view.dart';
 import 'package:fitdost_app/view/Features/TalkWithFitdostScreen.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -36,8 +37,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
               builder: (context,snapsot) {
-                if(snapsot.hasData) {
-                  final userData = snapsot.data!.data() as Map<String, dynamic>;
+                if(snapsot.hasData && snapsot.data!.exists) {
+                  final userData = snapsot.data?.data() as Map<String, dynamic>;
                   final name = userData["Username"] ?? "No Name";
                   return Container(
                     margin: EdgeInsets.only(top: 23.h,left: 18.w),
@@ -174,67 +175,72 @@ class _HomeScreenState extends State<HomeScreen> {
             Expanded(
               child: ListView(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Stack(
-                        children: [
-                          Container(
-                            width: 354.w,
-                            height: 110.h,
-                            decoration: ShapeDecoration(
-                              color: Color(0xFFFF6D6E),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              shadows: [
-                                BoxShadow(
-                                  color: Color(0x49000000),
-                                  blurRadius: 9.70,
-                                  offset: Offset(0, 5),
-                                  spreadRadius: 0,
-                                )
-                              ],
-                            ),
-                          ),
-                          Positioned(
-                            left: 17.w,
-                            top: 15.h,
-                            child:  Text(
-                              'Emotion\nRecognition',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w700,
-                                height: 1.5.h,
+                  InkWell(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>PoseDetectorView(),));
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Stack(
+                          children: [
+                            Container(
+                              width: 354.w,
+                              height: 110.h,
+                              decoration: ShapeDecoration(
+                                color: Color(0xFFFF6D6E),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                shadows: [
+                                  BoxShadow(
+                                    color: Color(0x49000000),
+                                    blurRadius: 9.70,
+                                    offset: Offset(0, 5),
+                                    spreadRadius: 0,
+                                  )
+                                ],
                               ),
                             ),
-                          ),
-                          Positioned(
-                            left: 17.w,
-                            top: 70.h,
-                            child:  Text(
-                              'Identify and manage your emotions effectively\nwith our AI-powered recognition tool.',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 7,
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w500,
-                                height: 0,
+                            Positioned(
+                              left: 17.w,
+                              top: 15.h,
+                              child:  Text(
+                                'Emotion\nRecognition',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w700,
+                                  height: 1.5.h,
+                                ),
                               ),
                             ),
-                          ),
-                          Positioned(
-                              left: 259.w,
-                              top: 28.h,
-                              child:  SvgPicture.asset("assets/images/Icons/FaceRecogIcon.svg")
-                          ),
+                            Positioned(
+                              left: 17.w,
+                              top: 70.h,
+                              child:  Text(
+                                'Identify and manage your emotions effectively\nwith our AI-powered recognition tool.',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 7,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w500,
+                                  height: 0,
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                                left: 259.w,
+                                top: 28.h,
+                                child:  SvgPicture.asset("assets/images/Icons/FaceRecogIcon.svg")
+                            ),
 
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
 
+                    ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
