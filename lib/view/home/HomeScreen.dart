@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fitdost_app/view/Features/AiHealthplan.dart';
 import 'package:fitdost_app/view/Features/AiPushupscounter/views/pose_detection_view.dart';
 import 'package:fitdost_app/view/Features/TalkWithFitdostScreen.dart';
 
@@ -10,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 
 class HomeScreen extends StatefulWidget{
   const HomeScreen({super.key});
@@ -78,85 +80,90 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SingleChildScrollView(
-                  child: Stack(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(top: 15.h),
-                        width: 354.w,
-                        height: 160.h,
-                        decoration: ShapeDecoration(
-                          color: Color(0xFF1D479B),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(22),
+            InkWell(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Aihealthplan(),));
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SingleChildScrollView(
+                    child: Stack(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(top: 15.h),
+                          width: 354.w,
+                          height: 160.h,
+                          decoration: ShapeDecoration(
+                            color: Color(0xFF1D479B),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(22),
+                            ),
+                            shadows: [
+                              BoxShadow(
+                                color: Color(0x49000000),
+                                blurRadius: 9.70,
+                                offset: Offset(0, 5),
+                                spreadRadius: 0,
+                              )
+                            ],
                           ),
-                          shadows: [
-                            BoxShadow(
-                              color: Color(0x49000000),
-                              blurRadius: 9.70,
-                              offset: Offset(0, 5),
-                              spreadRadius: 0,
-                            )
-                          ],
+
                         ),
-
-                      ),
-                      Positioned(
-                        left: 17.w,
-                        top: 56.h,
-                        child: Text(
-                          'Personalized \nHealth Plans',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.sp,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w700,
-                            height: 1.5.h,
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 17.w,
-                        top: 110.h,
-                        child: Text(
-                          'Receive customized diet plans, workout\nroutines,and relaxation techniques tailored\nto your needs.',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 7.sp,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w500,
-
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 180,
-                        top: 0,
-
-                        // child: Image.asset("assets/images/BackGrounds/card1.png"),
-                        child: Container(
-
-                          width: 145.w,
-                          height: 175.h,
-                          // alignment: Alignment.centerRight,
-
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: new AssetImage("assets/images/BackGrounds/card1.png"),
-                              fit: BoxFit.fill,
+                        Positioned(
+                          left: 17.w,
+                          top: 56.h,
+                          child: Text(
+                            'Personalized \nHealth Plans',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18.sp,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w700,
+                              height: 1.5.h,
                             ),
                           ),
                         ),
-                      ),
+                        Positioned(
+                          left: 17.w,
+                          top: 110.h,
+                          child: Text(
+                            'Receive customized diet plans, workout\nroutines,and relaxation techniques tailored\nto your needs.',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 7.sp,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w500,
 
-                    ],
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          left: 180,
+                          top: 0,
+
+                          // child: Image.asset("assets/images/BackGrounds/card1.png"),
+                          child: Container(
+
+                            width: 145.w,
+                            height: 175.h,
+                            // alignment: Alignment.centerRight,
+
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: new AssetImage("assets/images/BackGrounds/card1.png"),
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          ),
+                        ),
+
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
 
+              ),
             ),
             Container(
               margin: EdgeInsets.only(left: 18.w,top: 15.h,bottom: 10.h),

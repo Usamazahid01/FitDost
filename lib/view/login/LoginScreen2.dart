@@ -193,6 +193,10 @@ class _LoginPageState extends State<LoginScreen2> {
                    // },
                    onTap: () async {
                      if (_formKey.currentState?.validate() ?? false) {
+                       showDialog(context: context,
+                           barrierDismissible: false,
+                           builder: (context)=>Center(child: CircularProgressIndicator(),)
+                       );
                        try {
                          UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
                            email: _emailController.text.trim(),

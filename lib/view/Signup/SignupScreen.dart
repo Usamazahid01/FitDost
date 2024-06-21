@@ -277,6 +277,10 @@ class _SignupScreenState extends State<SignupScreen> {
                       onTap: () async {
                         if (_formKey.currentState?.validate() ?? false) {
       if (_passwordController.text == _confirmPasswordController.text) {
+        showDialog(context: context,
+          barrierDismissible: false,
+          builder: (context)=>Center(child: CircularProgressIndicator(),)
+        );
         try {
           UserCredential userCredential= await _auth.createUserWithEmailAndPassword(
             email: _emailController.text.trim(),

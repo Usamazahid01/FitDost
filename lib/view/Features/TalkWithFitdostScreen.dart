@@ -23,7 +23,7 @@ class _TalkWithFitdostScreenState extends State<TalkWithFitdostScreen> {
     _userMassege.clear();
 
     setState(() {
-      _message.add(Message(isUser: true, message: message, date: DateTime.now()));
+      _message.add(Message(isUser: true, message: "${message}", date: DateTime.now()));
     });
 
     final content=[Content.text(message)];

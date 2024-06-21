@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:fitdost_app/OnBoarding/BordingScreen1.dart';
 import 'package:fitdost_app/view/Signup/SignupScreen.dart';
+import 'package:fitdost_app/view/Signup/SignupScreen2.dart';
 import 'package:fitdost_app/view/home/HomeScreenMain.dart';
 import 'package:fitdost_app/view/login/LoginScreen2.dart';
 import 'package:flutter/material.dart';
