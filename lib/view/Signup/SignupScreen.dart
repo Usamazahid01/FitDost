@@ -5,6 +5,7 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitdost_app/common/Colour_extension.dart';
+import 'package:fitdost_app/view/Signup/VerifyEmailScreen.dart';
 import 'package:fitdost_app/view/home/HomeScreenMain.dart';
 import 'package:fitdost_app/view/login/LoginScreen2.dart';
 import 'package:flutter/cupertino.dart';
@@ -32,15 +33,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final _formKey = GlobalKey<FormState>();
   final _confirmPasswordController = TextEditingController();
 
-  Future addUserDetails( String displayName,String email  ) async
-  {
-    await FirebaseFirestore.instance.collection('users').add({
-      'displayName': displayName,
-      'email':email,
-      'uid': _auth.currentUser!.uid,
 
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -119,236 +112,227 @@ class _SignupScreenState extends State<SignupScreen> {
 
 
                 child: Stack(
-              children: [
-                Center(
-                  child: Container(
-                    margin: EdgeInsets.only(top: 254.h ),
-                    width: 310.w,
-                    height: 70.h,
-                    child: TextFormField(
-                      style: const TextStyle(color: Colors.black),
-                      controller: _nameController,
-                      validator: MultiValidator([
-                        RequiredValidator(errorText: 'Enter your username.'),
-                      ]),
-                      decoration: InputDecoration(
+                  children: [
+                    Center(
+                      child: Container(
+                        margin: EdgeInsets.only(top: 254.h ),
+                        width: 310.w,
+                        height: 70.h,
+                        child: TextFormField(
+                          style: const TextStyle(color: Colors.black),
+                          controller: _nameController,
+                          validator: MultiValidator([
+                            RequiredValidator(errorText: 'Enter your username.'),
+                          ]),
+                          decoration: InputDecoration(
 
-                        hintText: "Your Name",
-                        suffixIcon: Icon(Icons.person),
+                            hintText: "Your Name",
+                            suffixIcon: Icon(Icons.person),
 
-                        border: OutlineInputBorder(
+                            border: OutlineInputBorder(
 
+                            ),
+
+                          ),
                         ),
 
                       ),
                     ),
+                    Center(
+                      child: Container(
+                        margin: EdgeInsets.only(top: 324.h ),
+                        width: 310.w,
+                        height: 70.h,
+                        child: TextFormField(
+                          style: const TextStyle(color: Colors.black),
+                          controller: _emailController,
+                          validator: MultiValidator([
+                            RequiredValidator(errorText: 'Enter your email.'),
+                            EmailValidator(errorText: 'Enter a valid email address.'),
+                          ]),
+                          decoration: InputDecoration(
+                            //   errorStyle:TextStyle(
+                            //   fontSize: 2.sp, // Smaller font size
+                            //   height: 0, // No top margin
+                            //   color: Colors.red, // Error text color
+                            // ),
 
-                  ),
-                ),
-                Center(
-                  child: Container(
-                    margin: EdgeInsets.only(top: 324.h ),
-                    width: 310.w,
-                    height: 70.h,
-                    child: TextFormField(
-                      style: const TextStyle(color: Colors.black),
-                      controller: _emailController,
-                      validator: MultiValidator([
-                        RequiredValidator(errorText: 'Enter your email.'),
-                        EmailValidator(errorText: 'Enter a valid email address.'),
-                      ]),
-                      decoration: InputDecoration(
-                      //   errorStyle:TextStyle(
-                      //   fontSize: 2.sp, // Smaller font size
-                      //   height: 0, // No top margin
-                      //   color: Colors.red, // Error text color
-                      // ),
+                            hintText: "Email",
+                            suffixIcon: Icon(Icons.email),
 
-                        hintText: "Email",
-                        suffixIcon: Icon(Icons.email),
-
-                        border: OutlineInputBorder(
+                            border: OutlineInputBorder(
 
 
+                            ),
+
+                          ),
                         ),
 
                       ),
                     ),
+                    Center(
+                      child: Container(
+                        margin: EdgeInsets.only(top: 396.h),
+                        width: 310.w,
+                        height: 70.h,
+                        child: TextFormField(
+                          style: const TextStyle(color: Colors.black),
+                          controller: _passwordController,
+                          obscureText: true,
+                          validator: MultiValidator([
+                            RequiredValidator(errorText: 'Enter your password.'),
+                            MinLengthValidator(8,
+                                errorText: 'Password must be at least 8 characters long.'),
+                            PatternValidator(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*()]).{8,}$',
+                                errorText:
+                                'Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character.'),
+                          ]),
 
-                  ),
-                ),
-                Center(
-                  child: Container(
-                    margin: EdgeInsets.only(top: 396.h),
-                    width: 310.w,
-                    height: 70.h,
-                    child: TextFormField(
-                      style: const TextStyle(color: Colors.black),
-                      controller: _passwordController,
-                      obscureText: true,
-                      validator: MultiValidator([
-                        RequiredValidator(errorText: 'Enter your password.'),
-                        MinLengthValidator(8,
-                            errorText: 'Password must be at least 8 characters long.'),
-                        PatternValidator(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*()]).{8,}$',
-                            errorText:
-                            'Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character.'),
-                      ]),
+                          decoration: InputDecoration(
+                            hintText: "password",
+                            focusColor: Tcolor.primary1,
+                            suffixIcon: Icon(Icons.key),
 
-                      decoration: InputDecoration(
-                        hintText: "password",
-                        focusColor: Tcolor.primary1,
-                        suffixIcon: Icon(Icons.key),
-
-                        border: OutlineInputBorder(
+                            border: OutlineInputBorder(
 
 
 
+                            ),
+
+                          ),
                         ),
 
                       ),
                     ),
+                    Center(
+                      child: Container(
+                        margin: EdgeInsets.only(top: 467.h),
+                        width: 310.w,
+                        height: 70.h,
+                        child: TextFormField(
+                          style: const TextStyle(color: Colors.black),
+                          controller: _confirmPasswordController,
+                          obscureText: true,
+                          validator: MultiValidator([
 
-                  ),
-                ),
-                Center(
-                  child: Container(
-                    margin: EdgeInsets.only(top: 467.h),
-                    width: 310.w,
-                    height: 70.h,
-                    child: TextFormField(
-                      style: const TextStyle(color: Colors.black),
-                      controller: _confirmPasswordController,
-                      obscureText: true,
-                      validator: MultiValidator([
+                            RequiredValidator(errorText: 'Enter your password.'),
+                            MinLengthValidator(8,
+                                errorText: 'Password must be at least 8 characters long.'),
+                            PatternValidator(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*()]).{8,}$',
+                                errorText:
+                                'Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character.'),
+                          ]),
+                          decoration: InputDecoration(
+                            hintText: "Confirm Password",
+                            focusColor: Tcolor.primary1,
+                            suffixIcon: Icon(Icons.key),
 
-                        RequiredValidator(errorText: 'Enter your password.'),
-                        MinLengthValidator(8,
-                            errorText: 'Password must be at least 8 characters long.'),
-                        PatternValidator(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*()]).{8,}$',
-                            errorText:
-                            'Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character.'),
-                      ]),
-                      decoration: InputDecoration(
-                        hintText: "Confirm Password",
-                        focusColor: Tcolor.primary1,
-                        suffixIcon: Icon(Icons.key),
-
-                        border: OutlineInputBorder(
+                            border: OutlineInputBorder(
 
 
 
+                            ),
+
+                          ),
                         ),
 
                       ),
                     ),
+                    Container(
+                      margin: EdgeInsets.only(top:550.h),
 
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top:550.h),
-
-                  child: Center(
-                    child: Text(
-                      'By continuing, you agree to our Privacy Policy \n and our Terms of Service.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Color(0xFF6F6F6F),
-                        fontSize: 11.sp,
-                        fontFamily: 'Cabin',
-                        fontWeight: FontWeight.w400,
-                        height: 1.5.h,
-                      ),
-                    ),
-                  ),
-                ),
-                Center(
-                  child: Container(
-                    margin: EdgeInsets.only(top: 597.h),
-                    width: 177.w,
-                    height: 48.h,
-                    decoration: ShapeDecoration(
-                      color: Color(0xFF00B58D),
-                      shape: RoundedRectangleBorder(
-                        side: BorderSide(width: 0.50.w, color: Color(0xFF334853)),
-                      ),
-                    ),
-                    child: GestureDetector(
-                      onTap: () async {
-                        if (_formKey.currentState?.validate() ?? false) {
-      if (_passwordController.text == _confirmPasswordController.text) {
-        showDialog(context: context,
-          barrierDismissible: false,
-          builder: (context)=>Center(child: CircularProgressIndicator(),)
-        );
-        try {
-          UserCredential userCredential= await _auth.createUserWithEmailAndPassword(
-            email: _emailController.text.trim(),
-            password: _passwordController.text.trim(),
-          );
-          FirebaseFirestore.instance.collection("Users").doc(userCredential.user!.email).set({
-                          "Username": _nameController.text.trim(),
-                        "email":_emailController.text.trim(),
-                        });
-          //
-          // addUserDetails(
-          //   _nameController.text.trim(),
-          //   _emailController.text.trim(),
-          // );
-          CircularProgressIndicator();
-          Navigator.pushReplacement(
-
-            context,
-            MaterialPageRoute(builder: (context) => HomeScreenMain()),
-          );
-        } catch (error) {
-          Utils().toast(error.toString());
-        }
-      } else {
-        Utils().toast("Passwords do not match");
-      }
-    }
-                      },
                       child: Center(
                         child: Text(
-                          'Sign Up',
+                          'By continuing, you agree to our Privacy Policy \n and our Terms of Service.',
+                          textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.sp,
+                            color: Color(0xFF6F6F6F),
+                            fontSize: 11.sp,
                             fontFamily: 'Cabin',
                             fontWeight: FontWeight.w400,
-                            height: 0,
+                            height: 1.5.h,
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap:() => Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context)=>  LoginScreen2(),
+                    Center(
+                      child: Container(
+                        margin: EdgeInsets.only(top: 597.h),
+                        width: 177.w,
+                        height: 48.h,
+                        decoration: ShapeDecoration(
+                          color: Color(0xFF00B58D),
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(width: 0.50.w, color: Color(0xFF334853)),
+                          ),
+                        ),
+                        child: GestureDetector(
+                          onTap: () async {
+                            if (_formKey.currentState?.validate() ?? false) {
+                              if (_passwordController.text == _confirmPasswordController.text) {
+                                try {
+                                  UserCredential userCredential= await _auth.createUserWithEmailAndPassword(
+                                    email: _emailController.text.trim(),
+                                    password: _passwordController.text.trim(),
+                                  );
+                                  FirebaseFirestore.instance.collection("Users").doc(userCredential.user!.email).set({
+                                    "Username": _nameController.text.trim(),
+                                    "email":_emailController.text.trim(),
+                                  });
+                                  CircularProgressIndicator();
+                                  Navigator.pushReplacement(
 
-                  )),
-
-
-                  child: Container(
-                    margin: EdgeInsets.only(top: 660.h),
-                    child: Center(
-                      child: Text(
-                        'Or  Login',
-                        style: TextStyle(
-                          color: Color(0xFF666666),
-                          fontSize: 15.sp,
-                          fontFamily: 'Cabin',
-                          fontWeight: FontWeight.w400,
-                          height: 0,
+                                    context,
+                                    MaterialPageRoute(builder: (context) => VarifyEmailScreen()),
+                                  );
+                                } catch (error) {
+                                  Utils().toast(error.toString());
+                                }
+                              } else {
+                                Utils().toast("Passwords do not match");
+                              }
+                            }
+                          },
+                          child: Center(
+                            child: Text(
+                              'Sign Up',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18.sp,
+                                fontFamily: 'Cabin',
+                                fontWeight: FontWeight.w400,
+                                height: 0,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ),
-              ],
-            )),
+                    GestureDetector(
+                      onTap:() => Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context)=>  LoginScreen2(),
+
+                      )),
+
+
+                      child: Container(
+                        margin: EdgeInsets.only(top: 660.h),
+                        child: Center(
+                          child: Text(
+                            'Or  Login',
+                            style: TextStyle(
+                              color: Color(0xFF666666),
+                              fontSize: 15.sp,
+                              fontFamily: 'Cabin',
+                              fontWeight: FontWeight.w400,
+                              height: 0,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                )),
             Container(
               margin: EdgeInsets.only(top: 750.h),
               child: Center(

@@ -4,7 +4,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class AboutUsScreen extends StatefulWidget{
 
@@ -13,15 +12,7 @@ class AboutUsScreen extends StatefulWidget{
 }
 
 class _AboutUsScreenState extends State<AboutUsScreen> {
-  // LatLng initialLocation = const LatLng(37.422131, -122.084801);
-  // BitmapDescriptor markerIcon = BitmapDescriptor.defaultMarker;
-  LatLng initialLocation = LatLng(31.3489, 74.1602);
-  BitmapDescriptor markerIcon = BitmapDescriptor.defaultMarker;
-  @override
-  void initState() {
-    // addCustomIcon();
-    super.initState();
-  }
+
 
 
   @override

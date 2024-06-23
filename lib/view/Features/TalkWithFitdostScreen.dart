@@ -13,7 +13,18 @@ class TalkWithFitdostScreen extends StatefulWidget{
 class _TalkWithFitdostScreenState extends State<TalkWithFitdostScreen> {
   final _userMassege = TextEditingController();
   static const apiKey= "AIzaSyByHdQC4VjeiRUxnkX-uJ9PJPwJD5SuUMc";
-  final model = GenerativeModel(model:'gemini-pro',apiKey:apiKey);
+  final model = GenerativeModel(
+    model: 'gemini-1.5-flash',
+    apiKey: apiKey,
+    safetySettings: [
+      SafetySetting(HarmCategory.harassment, HarmBlockThreshold.medium),
+      SafetySetting(HarmCategory.hateSpeech, HarmBlockThreshold.medium),
+    ] ,
+    systemInstruction: Content.system(
+        'You are an AI Fitness Coach. Your Name is FitDost. Only Answer Questions or Queries Related to fitness, diet plans, or workout plans. I can help you with information and advice to achieve your fitness goals. Avoid answering questions outside these areas.'),
+  );
+
+  // final model = GenerativeModel(model:'gemini-pro',apiKey:apiKey);
 
   final List<Message> _message=[];
 
@@ -32,6 +43,10 @@ setState(() {
   _message.add(Message(isUser: false, message: response.text ?? "", date: DateTime.now()));
 });
   }
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

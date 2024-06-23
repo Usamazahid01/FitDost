@@ -32,27 +32,25 @@ dependencies:
     sdk: flutter
   flutter_screenutil: any
   flutter_svg: any
-  google_generative_ai: any
+  google_generative_ai: ^0.4.3
   intl: any
-  firebase_core: any
-  firebase_auth: any
+  firebase_core: ^3.1.0
+  firebase_auth: ^5.1.0
   fluttertoast: any
   google_sign_in: any
   form_validator: any
   form_field_validator: any
-  cloud_firestore: any
+  cloud_firestore: ^5.0.1
   image_picker: any
   cupertino_icons: any
-  firebase_storage: any
-  firebase_app_check: any
-  google_maps_flutter: any
-  map_launcher: any
+  firebase_storage: ^12.0.1
+  firebase_app_check: ^0.3.0+1
   flutter_bloc: any
-  google_ml_kit: any
+#  google_ml_kit: any
   camera: any
   path: any
   path_provider: any
-  google_mlkit_commons: any
+#  google_mlkit_commons: any
   lottie: any
   shared_preferences: any
 

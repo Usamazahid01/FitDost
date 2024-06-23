@@ -25,7 +25,7 @@ class HomeScreenMain extends StatefulWidget{
 class _HomeScreenState extends State<HomeScreenMain> {
   User? currentUser = FirebaseAuth.instance.currentUser;
   final Screns=[
-    SaveScreen(),
+    Savescreen(),
     HomeScreen(),
     ProfileBottomScreen(),
 

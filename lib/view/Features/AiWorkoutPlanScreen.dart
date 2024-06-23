@@ -4,18 +4,18 @@ import 'package:fitdost_app/view/Features/TalkWithFitdostScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 
-class Aihealthplan extends StatelessWidget {
+class AiWorkoutPlanScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-        appBar: AppBar(
-          backgroundColor:  const Color(0xFF00B58D),
-          title: Text("AI Health Plan", style: TextStyle(
-              color: Colors.white
-          ),),
-        ),
-        body: MyForm(),
-      );
+      appBar: AppBar(
+        backgroundColor:  const Color(0xFF00B58D),
+        title: Text("AI WorkOut Plan", style: TextStyle(
+            color: Colors.white
+        ),),
+      ),
+      body: MyForm(),
+    );
   }
 }
 
@@ -25,16 +25,16 @@ class MyForm extends StatefulWidget {
 }
 
 class _MyFormState extends State<MyForm> {
+
   User? currentUser = FirebaseAuth.instance.currentUser;
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _ageController = TextEditingController();
-  final TextEditingController _heightController = TextEditingController();
-  final TextEditingController _weightController = TextEditingController();
+  String? _exercises;
   String? _gender;
   String? _goal;
   static const apiKey = "AIzaSyByHdQC4VjeiRUxnkX-uJ9PJPwJD5SuUMc";
   final model = GenerativeModel(model: 'gemini-pro', apiKey: apiKey);
- var responsed= "";
+  var responsed= "";
   List<Message> _messages = []; // List to store user and Gemini messages
 
   // Future<void> _submitForm() async {
@@ -57,7 +57,7 @@ class _MyFormState extends State<MyForm> {
       _formKey.currentState!.save();
 
       // Prepare user data for chat screen
-      String userData = "I am a ${_ageController.text}-year-old ${_gender} who weighs ${_weightController.text} kg and is ${_heightController.text} feet tall. My goal is to ${_goal}. Please give me a diet plan for 1 week. please give me short and to the point and do not bold any text";
+      String userData = "I am a ${_ageController.text}-year-old i am ${_gender} who goal is to ${_goal} , i am doing  ${_exercises} . Please give me a Workout or Exercise plan  of 1 week. please give me short and to the point and do not bold any text";
 
       final content = [Content.text(userData)];
 
@@ -108,50 +108,31 @@ class _MyFormState extends State<MyForm> {
               },
             ),
             SizedBox(height: 16.0),
-            TextFormField(
-              controller: _heightController,
-              style: const TextStyle(color: Colors.black),
-              decoration: InputDecoration(
-                labelText: 'Height (feet)',
-                labelStyle: TextStyle(color: Colors.grey[700]),
-                contentPadding: EdgeInsets.symmetric(vertical: 10),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey[400]!),
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFF00BFA5)),
-                ),
-              ),
-              keyboardType: TextInputType.number,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your height';
-                }
-                return null;
-              },
-            ),
             SizedBox(height: 16.0),
-            TextFormField(
-              controller: _weightController,
-              style: const TextStyle(color: Colors.black),
-              decoration: InputDecoration(
-                labelText: 'Weight (kg)',
-                labelStyle: TextStyle(color: Colors.grey[700]),
-                contentPadding: EdgeInsets.symmetric(vertical: 10),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey[400]!),
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFF00BFA5)),
-                ),
+            Text('Goals', style: TextStyle(color: Colors.grey[700])),
+            ListTile(
+              title: const Text('Weight Gain'),
+              leading: Radio<String>(
+                value: 'Weight Gain',
+                groupValue:_goal,
+                onChanged: (String? value) {
+                  setState(() {
+                    _goal = value;
+                  });
+                },
               ),
-              keyboardType: TextInputType.number,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your weight';
-                }
-                return null;
-              },
+            ),
+            ListTile(
+              title: const Text('Weight Lose'),
+              leading: Radio<String>(
+                value: 'Weight Lose',
+                groupValue: _goal,
+                onChanged: (String? value) {
+                  setState(() {
+                    _goal = value;
+                  });
+                },
+              ),
             ),
             SizedBox(height: 20),
             Text('Gender', style: TextStyle(color: Colors.grey[700])),
@@ -180,31 +161,32 @@ class _MyFormState extends State<MyForm> {
               ),
             ),
             SizedBox(height: 20),
-            Text('Goals', style: TextStyle(color: Colors.grey[700])),
+            Text('Which Exercises?', style: TextStyle(color: Colors.grey[700])),
             ListTile(
-              title: const Text('Gain Weight'),
+              title: const Text('yoga'),
               leading: Radio<String>(
-                value: 'Gain Weight',
-                groupValue: _goal,
+                value: 'yoga',
+                groupValue: _exercises,
                 onChanged: (String? value) {
                   setState(() {
-                    _goal = value;
+                    _exercises = value;
                   });
                 },
               ),
             ),
             ListTile(
-              title: const Text('Lose Weight'),
+              title: const Text('Gym'),
               leading: Radio<String>(
-                value: 'Lose Weight',
-                groupValue: _goal,
+                value: 'Gym',
+                groupValue: _exercises,
                 onChanged: (String? value) {
                   setState(() {
-                    _goal = value;
+                    _exercises = value;
                   });
                 },
               ),
             ),
+
             SizedBox(height: 20),
             Container(
               width: 5    , // Set the desired width here
@@ -222,10 +204,10 @@ class _MyFormState extends State<MyForm> {
                       SnackBar(content: Text('Processing Data')),
 
                     );
-                   _submitForm();
-                   setState(() {
+                    _submitForm();
+                    setState(() {
 
-                   });
+                    });
                   }
                 },
                 child: Text(
@@ -238,25 +220,25 @@ class _MyFormState extends State<MyForm> {
               ),
             ),
 
-               Container(
-                margin: EdgeInsets.only(top: 18),
-                child: Text(
-                  'RESPONSE FROM AI',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 22,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w500,
-                    height: 0,
-                  ),
+            Container(
+              margin: EdgeInsets.only(top: 18),
+              child: Text(
+                'RESPONSE FROM AI',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 22,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                  height: 0,
                 ),
               ),
+            ),
 
-                // Stack(
-                //   children: [
-                //
-                //   ],
-                // ),
+            // Stack(
+            //   children: [
+            //
+            //   ],
+            // ),
             Column(
 
             ),
@@ -301,7 +283,7 @@ class _MyFormState extends State<MyForm> {
                         try {
                           print('Saving response data...');
                           await FirebaseFirestore.instance.collection("Users").doc(currentUser?.email).update({
-                            "ResponseData": responseText,
+                            "WorkoutPlan": responseText,
                           });
                           print('Response data saved successfully');
                         } catch (error) {
@@ -329,9 +311,6 @@ class _MyFormState extends State<MyForm> {
 
 
             ),
-
-
-
 
           ],
         ),
